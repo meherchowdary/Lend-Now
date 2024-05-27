@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KYC Verification</title>
+    <style>
+        /* Common styles for input fields and labels */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+
+        input[type="file"] {
+            border: none;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>KYC Verification</h2>
+        <form id="kyc-verification-form">
+            <label for="aadhaar-card">Upload Aadhaar Card:</label>
+            <input type="file" id="aadhaar-card" name="aadhaar-card" accept="image/*,application/pdf" required>
+            
+            <label for="pan-card">Upload PAN Card:</label>
+            <input type="file" id="pan-card" name="pan-card" accept="image/*,application/pdf" required>
+            
+            <label for="passport-photo">Upload Passport Photo:</label>
+            <input type="file" id="passport-photo" name="passport-photo" accept="image/*" required>
+            
+            <label for="live-selfie">Live Selfie Capture:</label>
+            <input type="file" id="live-selfie" name="live-selfie" accept="image/*" required>
+            
+            <button type="button" onclick="goTofin()">Proceed</button>
+        </form>
+    </div>
+    <script>
+        function goToScreen(screenId) {
+            document.location.href = `${screenId}.html`;
+        }
+        
+        function goTofin() {
+            window.location.href = 'final.html';
+        }
+
+        document.getElementById('kyc-verification-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const aadhaarCard = document.getElementById('aadhaar-card').files[0];
+            const panCard = document.getElementById('pan-card').files[0];
+            const passportPhoto = document.getElementById('passport-photo').files[0];
+            const liveSelfie = document.getElementById('live-selfie').files[0];
+
+            // Prepare the data to be sent to the server
+            const formData = new FormData();
+            formData.append('aadhaarCard', aadhaarCard);
+            formData.append('panCard', panCard);
+            formData.append('passportPhoto', passportPhoto);
+            formData.append('liveSelfie', liveSelfie);
+
+            const response = await fetch('/kyc-verification', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.success) {
+                goToScreen('terms-and-conditions');
+            } else {
+                alert('Failed to complete KYC verification');
+            }
+        });
+    </script>
+</body>
+</html>

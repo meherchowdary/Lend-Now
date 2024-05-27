@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Address Details</h2>
+        <form id="address-details-form">
+            <h3>Current Address</h3>
+            <label for="current-address-line1">Address Line 1:</label>
+            <input type="text" id="current-address-line1" name="current-address-line1" required>
+            
+            <label for="current-address-line2">Address Line 2:</label>
+            <input type="text" id="current-address-line2" name="current-address-line2">
+            
+            <label for="current-city">City:</label>
+            <input type="text" id="current-city" name="current-city" required>
+            
+            <label for="current-state">State:</label>
+            <input type="text" id="current-state" name="current-state" required>
+            
+            <label for="current-pincode">Pincode:</label>
+            <input type="text" id="current-pincode" name="current-pincode" required>
+            
+            <h3>Permanent Address</h3>
+            <label class="checkbox-label">
+                <input type="checkbox" id="same-as-current" onclick="copyCurrentAddress()"> Same as Current Address
+            </label>
+            
+            <label for="permanent-address-line1">Address Line 1:</label>
+            <input type="text" id="permanent-address-line1" name="permanent-address-line1" required>
+            
+            <label for="permanent-address-line2">Address Line 2:</label>
+            <input type="text" id="permanent-address-line2" name="permanent-address-line2">
+            
+            <label for="permanent-city">City:</label>
+           
+            <input type="text" id="permanent-city" name="permanent-city" required>
+            
+            <label for="permanent-state">State:</label>
+            <input type="text" id="permanent-state" name="permanent-state" required>
+            
+            <label for="permanent-pincode">Pincode:</label>
+            <input type="text" id="permanent-pincode" name="permanent-pincode" required>
+            
+            <label for="address-proof">Upload Address Proof:</label>
+            <input type="file" id="address-proof" name="address-proof" accept="image/*,application/pdf" required>
+            
+            <button type="button" onclick="goToAdd()">Proceed</button>
+        </form>
+    </div>
+    <script src="app address.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employment and Income Details</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Employment and Income Details</h2>
+        <form id="employment-info-form">
+            <label for="employment-type">Employment Type:</label>
+            <select id="employment-type" name="employment-type" required>
+                <option value="salaried">Salaried</option>
+                <option value="self-employed">Self-Employed</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <label for="employer-name">Employer Name:</label>
+            <input type="text" id="employer-name" name="employer-name" required>
+            
+            <label for="designation">Designation/Job Title:</label>
+            <input type="text" id="designation" name="designation" required>
+            
+            <label for="work-address">Work Address:</label>
+            <input type="text" id="work-address" name="work-address" required>
+            
+            <label for="monthly-income">Monthly Income:</label>
+            <input type="number" id="monthly-income" name="monthly-income" required>
+            
+            <label for="income-proof">Upload Income Proof:</label>
+            <input type="file" id="income-proof" name="income-proof" accept="image/*,application/pdf" required>
+            
+            <button type="button" onclick="goToScr()">Proceed</button>
+        </form>
+    </div>
+    <script src="empl.js"></script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instant Loan Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <img src="https://img.icons8.com/?size=100&id=34013&format=png&color=000000" alt="App Logo" class="logo">
+        <h1>Welcome to Instant Loan Application</h1>
+        <form id="loan-info-form">
+            <label for="loan-amount">Loan Amount:</label>
+            <input type="range" id="loan-amount" name="loan-amount" min="10000" max="500000" step="10000" value="10000" oninput="updateLoanAmountValue()">
+            <div class="loan-amount-display">
+                Selected Loan Amount: <span id="loan-amount-value">₹10000</span>
+            </div>
+
+            <label for="loan-tenure">Loan Tenure:</label>
+            <select id="loan-tenure" name="loan-tenure">
+                <option value="3">3 months</option>
+                <option value="6">6 months</option>
+                <option value="12">12 months</option>
+                <option value="24">24 months</option>
+                <option value="36">36 months</option>
+            </select>
+
+            <p>Interest Rate: <span id="interest-rate">12% per annum</span></p>
+            <button type="button" onclick="goToInfoPage()">Proceed</button>
+
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

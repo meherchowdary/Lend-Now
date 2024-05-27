@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Details</title>
+    <style>
+        /* Common styles for input fields and labels */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #34495e;
+        }
+
+        input[type="text"], 
+        input[type="file"], 
+        select {
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        input[type="file"] {
+            border: none;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Bank Details</h2>
+        <form id="bank-details-form">
+            <label for="bank-name">Bank Name:</label>
+            <input type="text" id="bank-name" name="bank-name" required>
+            
+            <label for="account-number">Account Number:</label>
+            <input type="text" id="account-number" name="account-number" required>
+            
+            <label for="ifsc-code">IFSC Code:</label>
+            <input type="text" id="ifsc-code" name="ifsc-code" required>
+            
+            <label for="account-type">Account Type:</label>
+            <select id="account-type" name="account-type" required>
+                <option value="savings">Savings</option>
+                <option value="current">Current</option>
+            </select>
+            
+            <label for="bank-statement">Upload Bank Statement:</label>
+            <input type="file" id="bank-statement" name="bank-statement" accept="image/*,application/pdf" required>
+            
+            <button type="button" onclick="goToSn()">Proceed</button>
+        </form>
+    </div>
+    <script>
+        function goToScreen(screenId) {
+            document.location.href = `${screenId}.html`;
+        }
+        
+        function goToSn() {
+            window.location.href = 'KYC.html';
+        }
+
+        document.getElementById('bank-details-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const bankName = document.getElementById('bank-name').value;
+            const accountNumber = document.getElementById('account-number').value;
+            const ifscCode = document.getElementById('ifsc-code').value;
+            const accountType = document.getElementById('account-type').value;
+            const bankStatement = document.getElementById('bank-statement').files[0];
+
+            // Prepare the data to be sent to the server
+            const formData = new FormData();
+            formData.append('bankName', bankName);
+            formData.append('accountNumber', accountNumber);
+            formData.append('ifscCode', ifscCode);
+            formData.append('accountType', accountType);
+            formData.append('bankStatement', bankStatement);
+
+            const response = await fetch('/bank-details', {
+                method: 'POST',
+                body: formData
+            });
+
+            const result = await response.json();
+            console.log(result);
+            if (result.success) {
+                goToScreen('kyc-verification');
+            } else {
+                alert('Failed to submit bank details');
+            }
+        });
+    </script>
+</body>
+</html>
